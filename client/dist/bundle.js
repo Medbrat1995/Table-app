@@ -1090,8 +1090,8 @@ var Table = function (_React$Component) {
 			console.log(this.state.users);
 			if (this.state.users) {
 				var userTemplate = this.state.users.map(function (item, index) {
-					return _react2.default.createElement(_user2.default, { key: index, user: item, userClicked: this.props.userClicked.bind(this, item) });
-				});
+					return _react2.default.createElement(_user2.default, { key: index, user: item, userClicked: this.props.userClicked });
+				}, this);
 			} else var userTemplate = null;
 			return _react2.default.createElement(
 				'div',

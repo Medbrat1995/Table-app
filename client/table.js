@@ -57,8 +57,8 @@ export default class Table extends React.Component{
 		 if(this.state.users)
 		 	{var userTemplate = this.state.users.map(function(item, index){
 		 	return(
-		 		<User key={index} user={item} userClicked={this.props.userClicked.bind(this, item)} />) 
-		 })
+		 		<User key={index} user={item} userClicked={this.props.userClicked} />) 
+		 }, this)
 		}
 		else var userTemplate = null;
 		return(
