@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Table from './table.js';
-import {App} from './app.js';
+import ClickedUser from './clicked-user.js';
 
 export default class User extends React.Component{
 	constructor(props){
@@ -29,7 +29,7 @@ export default class User extends React.Component{
 		if (this.state)
 		{
 			return(
-				<tr key={this.state.id}>
+				<tr key={this.state.id} onClick={this.props.userClicked}>
 					<td>{this.state.id}</td>
 					<td>{this.state.firstName}</td>
 					<td>{this.state.lastName}</td>

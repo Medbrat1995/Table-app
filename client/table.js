@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {App} from './app.js'
 import User from './user.js'
+import ClickedUser from './clicked-user.js';
 
 export default class Table extends React.Component{
 	
@@ -10,7 +11,8 @@ export default class Table extends React.Component{
 		this.state = {
 			users: this.props.table,
 			desc: false,
-			column: null
+			column: null,
+			clickedUser: null
 		};
 
 	}
@@ -18,7 +20,8 @@ export default class Table extends React.Component{
 
 	componentWillReceiveProps(nextProps){
 		this.setState({
-			users: nextProps.table
+			users: nextProps.table,
+			clickedUser: nextProps.clickedUser
 		});
 		console.log("Table props received");
 	}
@@ -41,16 +44,26 @@ export default class Table extends React.Component{
 		
 	}
 
+	userClicked(usr, e){
+		e.preventDefault();
+		this.setState({
+			clickedUser: usr
+		});
+	}
+
 	render(){
 		 console.log(this.props.table);
 		 console.log(this.state.users);
 		 if(this.state.users)
 		 	{var userTemplate = this.state.users.map(function(item, index){
-		 	return(<User key={index} user={item} />)
+		 	return(
+		 		<User key={index} user={item} userClicked={this.props.userClicked.bind(this, item)} />) 
 		 })
 		}
 		else var userTemplate = null;
-		return(<table className='table'> 
+		return(
+			<div>
+			<table className='table'> 
 				<tbody>
 					<tr>
 						<td id='id' onClick={this.tableSort.bind(this)}>id</td>
@@ -61,7 +74,9 @@ export default class Table extends React.Component{
 					</tr>
 					{userTemplate}
 				</tbody>
-			</table>);
+			</table>
+			<ClickedUser user={this.state.clickedUser} />
+			</div>);
 	}
 
 }
